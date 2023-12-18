@@ -11,26 +11,27 @@ def grouping(sorted_mas):
         subgroup = max_kolvo[barcode[0]]
         # print(barcode)
         if r_file[barcode[2]]['kol-vo'] > subgroup:
-            
+            # while 
             tmp_mas = []
             tmp_mas.append(barcode[2])
-            tmp_mas.append(r_file[barcode[2]]["kol-vo"])
+            tmp_mas.append(subgroup)
             r_file[barcode[2]]["kol-vo"] = r_file[barcode[2]]["kol-vo"] - subgroup
             ret_mas.append(tmp_mas)
-        elif r_file[barcode[2]]['kol-vo'] == subgroup:
+        if r_file[barcode[2]]['kol-vo'] == subgroup:
             tmp_mas = []
             tmp_mas.append(barcode[2])
             tmp_mas.append(r_file[barcode[2]]["kol-vo"])
             tmp_mas.append("chotko_vlezlo")
             ret_mas.append(tmp_mas)
             del r_file[barcode[2]]
-        elif r_file[barcode[2]]['kol-vo'] < subgroup:
-            tmp_mas = []
-            tmp_mas.append(barcode[2])
-            tmp_mas.append(r_file[barcode[2]]["kol-vo"])
-            tmp_mas.append("vlezet_eshcho")
-            ret_mas.append(tmp_mas)
-            del r_file[barcode[2]]
+        if barcode[2] in r_file:
+            if r_file[barcode[2]]['kol-vo'] < subgroup:
+                tmp_mas = []
+                tmp_mas.append(barcode[2])
+                tmp_mas.append(r_file[barcode[2]]["kol-vo"])
+                tmp_mas.append("vlezet_eshcho")
+                ret_mas.append(tmp_mas)
+                del r_file[barcode[2]]
     for i in ret_mas:
         print(i)
 
