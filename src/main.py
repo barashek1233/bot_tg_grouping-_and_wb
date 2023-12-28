@@ -28,7 +28,7 @@ def get_text_messages(message):
         data = message.text
         parser_1.add_in_file(data)
         sorted_mas = sort.sorting()
-        grouping.grouping(sorted_mas)
-
+        po_korobam : list = grouping.grouping(sorted_mas)
+        # upload_to_google(po_korobam, "otgruzka1")
 
 bot.polling(none_stop=True, interval=0)

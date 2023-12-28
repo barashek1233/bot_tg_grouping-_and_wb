@@ -38,10 +38,7 @@ def grouping(sorted_mas : list):
                 max_size_in_korob = max_size_in_korob - r_file[sorted_mas[item][2]]['kol-vo']
                 item += 1
                 # sorted_mas.pop(item)
-    item = 1
-    for i in ret_mas:
-        print("korob",item, "---" ,i)
-        item+=1
+        return ret_mas
 
         
 
