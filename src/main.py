@@ -3,8 +3,9 @@ import parser_1
 import sort
 import grouping
 import up_google
+from data import API_KEY
 from telebot import types
-bot = telebot.TeleBot('6809416938:AAE-zQsdUhSdxgSyACYxPxCc620YzonYQ-U')
+bot = telebot.TeleBot(API_KEY)
 
 
 @bot.message_handler(commands=['start'])
