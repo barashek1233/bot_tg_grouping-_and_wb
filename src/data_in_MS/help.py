@@ -7,7 +7,7 @@ def add_in_file():
 
 # add_in_file()
 
-def res():
+def main():
     with open("test.json", "r") as read_file:
         data = json.load(read_file)
     dicktionary = {}
@@ -26,4 +26,5 @@ def res():
         json.dump(dicktionary, rest, indent=4)
     print(dicktionary)
     
-res()
+if __name__ == __main__ :
+    main()
