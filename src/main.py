@@ -27,14 +27,6 @@ def get_text_messages(message):
 
     else:
         bot.send_message(message.from_user.id, "ме")
-        # data = message.text
-        # parser_1.add_in_file(data)
-        # sorted_mas = sort.sorting()
-        # po_korobam : list = grouping.grouping(sorted_mas)
-        # glist : list = grouping.pred_up_in_boxes(po_korobam)
-        # # print(po_korobam)
-        # # upload_to_google(po_korobam, "otgruzka1")
-        # up_google.google_api(glist)
         
 
 def get_name_worksheet(message):
