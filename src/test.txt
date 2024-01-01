@@ -1,3 +1,0 @@
-name1 atr1 kolvo1
-name2 art2 kolvo2
-name3 art3 kolva3

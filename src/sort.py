@@ -12,8 +12,8 @@ def sort(data):
     mas = []
     for i in data:
         tmp_mas = []
+        tmp_mas.append(str(data[i]['group']))
         tmp_mas.append(str(data[i]['subgroup']))
-        tmp_mas.append(data[i]['group'])
         tmp_mas.append(str(i))
         mas.append(tmp_mas)
     mas.sort()
