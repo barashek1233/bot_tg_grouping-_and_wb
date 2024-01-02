@@ -3,7 +3,7 @@ import parser_1
 import sort
 import grouping
 import up_google
-from data import API_KEY
+from dataa import API_KEY
 from telebot import types
 bot = telebot.TeleBot(API_KEY)
 

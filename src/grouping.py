@@ -1,5 +1,5 @@
 import json
-from data import formula_art, formula_razmera
+from dataa import formula_art, formula_razmera
 
 def grouping(sorted_mas : list):
     ret_mas = []
