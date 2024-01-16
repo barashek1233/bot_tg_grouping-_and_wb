@@ -119,23 +119,3 @@ class paid_storage(statistics):
             tmp_list = list(data.values())
             self.glist.append(tmp_list)
 
-
-        
-# paid_storage1 = paid_storage("2024-01-11", "2024-01-12")
-# paid_storage1.get_paid_storage()
-# print(paid_storage1.glist)
-                            
-
-
-        
-
-# paid_storage1 = paid_storage("2024-01-10", "2024-01-11")
-# # print(paid_storage1.get_paid_storage())
-# paid_storage1.get_paid_storage()
-
-
-# sales = deliveries_and_store("2024-01-01")
-# print(sales.get_deliveries())
-# resp = statistics("2024-01-01")
-# resp.qreate_request()
-# print(resp.respons.status_code)

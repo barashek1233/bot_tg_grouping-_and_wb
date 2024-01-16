@@ -26,15 +26,12 @@ data = ""
 def start(message):
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
     btn1 = types.KeyboardButton("Добавить отгрузку")
-    # btn3 = types.KeyboardButton("Как работает")
     btn_deleyed_gen = types.KeyboardButton("Получить отчет о хранении")
     markup.add(btn1, btn_deleyed_gen)
     bot.send_message(message.chat.id, text="Привет, {0.first_name}! Используй кнопки".format(message.from_user), reply_markup=markup)
 
 @bot.message_handler(content_types=['text'])
 def get_text_messages(message): 
-    # if message.text == "Как работает":
-    #     bot.send_message(message.from_user.id, "этот бот конвертирует текст в файл отгрузки в гугл документе, для его работы нажми кнопку добавить отгрузку и следуй инструкциям")
     if message.text == "Добавить отгрузку":
         bot.send_message(message.from_user.id, "Введите навзание отгрузки, которое будет отображаться в названии листа googlesheet")
         bot.register_next_step_handler(message, get_name_worksheet)

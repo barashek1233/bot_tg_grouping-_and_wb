@@ -9,13 +9,9 @@ def grouping(sorted_mas : list):
         max_kolvo : dict = json.load(ma_kolvo)
     item = 0
     len_mas = len(sorted_mas)
-    # while sorted_mas:
     while len_mas > item:
         group = sorted_mas[item][0]
-        # print("group ", group)
         max_size_in_korob : int = max_kolvo[group]
-        # print("max_size", max_size_in_korob)
-        # max_size_in_korob : int = 10
         tmp_korob : list = []
         print(sorted_mas)
         while max_size_in_korob > 0 and len_mas > item:
@@ -46,7 +42,6 @@ def grouping(sorted_mas : list):
                     print(sorted_mas[item])
                     if group != sorted_mas[item+1][0]:
                         break
-                # sorted_mas.pop(item)
     return ret_mas
 
         

@@ -41,21 +41,3 @@ def google_api(glist : list, name_worksheet : str):
     # add_boxes_in_table(worksheet_list, glist)
     # worksheet_list.insert_rows(glist)
     worksheet_list.insert_rows(glist)
-
-#Выводим значение ячейки A1
-# worksheet_list = sh.worksheets()
-# print(worksheet_list)
-    
-# def test_main():
-#     gc = gspread.service_account(filename='mypython-408913-267a81584536.json')
-#     #Открываем тестовую таблицу
-#     sh = gc.open("Копия Отгрузки-2")
-#     ws = sh.worksheet("051tula")
-#     # for id in sh.worksheets():
-#     #     print(id)
-#     list_of_lists = ws.get_all_values()
-#     print(list_of_lists)
-
-
-# if __name__ == "__main__":
-#     test_main()
