@@ -34,25 +34,28 @@ def add_boxes_in_table(worksheet_list, glist : list):
 
 def google_api(glist : list, name_worksheet : str):
     # Указываем путь к JSON
-    gc = gspread.service_account(filename='mypython-408913-267a81584536.json')
+    gc = gspread.service_account(filename='grouping/mypython-408913-267a81584536.json')
     #Открываем тестовую таблицу
     sh = gc.open("Копия Отгрузки-2")
     worksheet_list = sh.add_worksheet(title=name_worksheet, rows=100, cols=20)
     # add_boxes_in_table(worksheet_list, glist)
+    # worksheet_list.insert_rows(glist)
     worksheet_list.insert_rows(glist)
 
 #Выводим значение ячейки A1
 # worksheet_list = sh.worksheets()
 # print(worksheet_list)
     
-def main():
-    gc = gspread.service_account(filename='mypython-408913-267a81584536.json')
-    #Открываем тестовую таблицу
-    sh = gc.open("Копия Отгрузки-2")
-    for id in sh.worksheets():
-        print(id)
-    # print(sh.worksheets())
+# def test_main():
+#     gc = gspread.service_account(filename='mypython-408913-267a81584536.json')
+#     #Открываем тестовую таблицу
+#     sh = gc.open("Копия Отгрузки-2")
+#     ws = sh.worksheet("051tula")
+#     # for id in sh.worksheets():
+#     #     print(id)
+#     list_of_lists = ws.get_all_values()
+#     print(list_of_lists)
 
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     test_main()

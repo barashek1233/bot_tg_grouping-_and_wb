@@ -2,7 +2,7 @@ import json
 
 
 def sopen_read_file():
-    with open("rest.json", "r") as read_file:
+    with open("grouping/rest.json", "r") as read_file:
         data = json.load(read_file)
     return data
 

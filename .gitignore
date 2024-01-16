@@ -1,2 +1,6 @@
 mypython-408913-267a81584536.json
-src/dataa.py
+*dataa.py
+*data.py
+*env.py
+*.json
+*test*

@@ -1,11 +1,11 @@
 import json
-from dataa import formula_art, formula_razmera
+from grouping.dataa import formula_art, formula_razmera
 
 def grouping(sorted_mas : list):
     ret_mas = []
-    with open("data_file.json", "r") as read_file:
+    with open("grouping/data_file.json", "r") as read_file:
         r_file : dict = json.load(read_file)
-    with open("group_kolvo.json", "r") as ma_kolvo:
+    with open("grouping/group_kolvo.json", "r") as ma_kolvo:
         max_kolvo : dict = json.load(ma_kolvo)
     item = 0
     len_mas = len(sorted_mas)
@@ -17,6 +17,7 @@ def grouping(sorted_mas : list):
         # print("max_size", max_size_in_korob)
         # max_size_in_korob : int = 10
         tmp_korob : list = []
+        print(sorted_mas)
         while max_size_in_korob > 0 and len_mas > item:
             if r_file[sorted_mas[item][2]]['kol-vo'] == max_size_in_korob:
                 tmp_korob.append(sorted_mas[item][2])  # in func or class
@@ -40,7 +41,9 @@ def grouping(sorted_mas : list):
                 tmp_korob.append(r_file[sorted_mas[item][2]]['kol-vo'])
                 max_size_in_korob = max_size_in_korob - r_file[sorted_mas[item][2]]['kol-vo']
                 item += 1
-                if item < len_mas:
+                if item < len_mas-1:
+                    
+                    print(sorted_mas[item])
                     if group != sorted_mas[item+1][0]:
                         break
                 # sorted_mas.pop(item)
