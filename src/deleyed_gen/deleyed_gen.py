@@ -2,7 +2,8 @@
 import requests
 import json
 from time import sleep
-from deleyed_gen.env import api_key, url_store, url_delivery, url_orders, url_sales, url_paid_storage_create, url_paid_storage_download, url_paid_storage_status
+# from deleyed_gen.env import api_key, url_store, url_delivery, url_orders, url_sales, url_paid_storage_create, url_paid_storage_download, url_paid_storage_status
+from env import api_key, url_store, url_delivery, url_orders, url_sales, url_paid_storage_create, url_paid_storage_download, url_paid_storage_status
 
 class statistics:
 
@@ -12,6 +13,15 @@ class statistics:
                         "Authorization" : api_key
                         }
         self.param = params
+
+    def get_params(self, url : str):
+        self.respon = requests.get(url, headers=self.header, params=self.param)
+        if self.respon.status_code == 200 :
+            resp_dict = self.respon.json()
+            return [resp_dict, self.respon.status_code]
+        else :
+            self.status_error = self.respon.status_code
+            return ["error", self.respon.status_code]
 
     def get_repons(self, url : str):
         self.respon = requests.get(url, headers=self.header, json=self.param)
@@ -35,6 +45,7 @@ class statistics:
 class deliveries_and_store(statistics):
 
     def __init__(self, dateFrom):
+        self.glist = []
         params = {
                         "dateFrom" : dateFrom
                         }
@@ -44,12 +55,25 @@ class deliveries_and_store(statistics):
         return self.get_repons(url_delivery)
         
     def get_store(self):
-        return self.get_repons(url_store)
+        request_data = self.get_params(url_store)
+        if request_data[1] == 200:
+            with open("store.json", "w") as write_file:
+                json.dump(request_data, write_file, indent=4)
+            tmp_list = ["lastChangeDate", "warehouseName", "supplierArticle", "nmId", "barcode", 
+                    "quantity", "inWayToClient", "inWayFromClient", "quantityFull", "category",
+                    "subject", "brand", "techSize", "Price", "Discount", "isSupply", "isRealization", 
+                    "SCCode"]
+            self.glist.append(tmp_list)
+            for data in request_data[0]:
+                tmp_list = list(data.values())
+                self.glist.append(tmp_list)
+        # return self.get_repons(url_store)
 
 
 class orders_and_slaes(statistics):
 
-    def __init__(self, dateFrom, flag = 0):
+    def __init__(self, dateFrom, flag = 1):
+        self.glist = []
         params = {
                     "dateFrom" : dateFrom,
                     "flag" : flag
@@ -57,7 +81,14 @@ class orders_and_slaes(statistics):
         statistics.__init__(self, params)
 
     def get_orders(self):
-        return self.respon(url_orders)
+        request_data = self.get_params(url_store)
+        if request_data[1] == 200:
+            with open("store.json", "w") as write_file:
+                json.dump(request_data, write_file, indent=4)
+        for data in request_data[0]:
+                tmp_list = list(data.values())
+                self.glist.append(tmp_list)
+        # return self.respon(url_orders)
     
     def get_sales(self):
         return self.respon(url_sales)
@@ -119,3 +150,6 @@ class paid_storage(statistics):
             tmp_list = list(data.values())
             self.glist.append(tmp_list)
 
+# test = orders_and_slaes("2024-01-19")
+# test.get_orders()
+# print(test.glist)
