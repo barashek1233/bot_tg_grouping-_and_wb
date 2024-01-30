@@ -2,8 +2,8 @@
 import requests
 import json
 from time import sleep
-# from deleyed_gen.env import api_key, url_store, url_delivery, url_orders, url_sales, url_paid_storage_create, url_paid_storage_download, url_paid_storage_status
-from env import api_key, url_store, url_delivery, url_orders, url_sales, url_paid_storage_create, url_paid_storage_download, url_paid_storage_status
+from deleyed_gen.env import api_key, url_store, url_delivery, url_orders, url_sales, url_paid_storage_create, url_paid_storage_download, url_paid_storage_status
+# from env import api_key, url_store, url_delivery, url_orders, url_sales, url_paid_storage_create, url_paid_storage_download, url_paid_storage_status
 
 class statistics:
 
@@ -74,6 +74,7 @@ class orders_and_slaes(statistics):
 
     def __init__(self, dateFrom, flag = 1):
         self.glist = []
+        
         params = {
                     "dateFrom" : dateFrom,
                     "flag" : flag
@@ -81,13 +82,14 @@ class orders_and_slaes(statistics):
         statistics.__init__(self, params)
 
     def get_orders(self):
-        request_data = self.get_params(url_store)
-        if request_data[1] == 200:
-            with open("store.json", "w") as write_file:
-                json.dump(request_data, write_file, indent=4)
-        for data in request_data[0]:
-                tmp_list = list(data.values())
-                self.glist.append(tmp_list)
+        self.request_data = self.get_params(url_orders)
+        if self.request_data[1] == 200:
+            with open("orders.json", "w") as write_file:
+                json.dump(self.request_data, write_file, indent=4)
+        # for data in self.request_data[0]:
+        #         if data["orderType"] == "Клиентский":
+        #             tmp_list = list(data.values())
+        #             self.glist.append(tmp_list)
         # return self.respon(url_orders)
     
     def get_sales(self):
@@ -150,6 +152,6 @@ class paid_storage(statistics):
             tmp_list = list(data.values())
             self.glist.append(tmp_list)
 
-# test = orders_and_slaes("2024-01-19")
+# test = orders_and_slaes("2024-01-23")
 # test.get_orders()
 # print(test.glist)
