@@ -33,9 +33,9 @@ class report_sales():
         for key in self.res:
             tmp_glist = []
 
-            tmp_glist.append(key)
+            tmp_glist.append(str(key))
             for item in self.res[key]:
-                tmp_glist.append(item)
+                tmp_glist.append(str(item))
             glist.append(tmp_glist)
         return glist
 

@@ -55,16 +55,16 @@ class deliveries_and_store(statistics):
         return self.get_repons(url_delivery)
         
     def get_store(self):
-        request_data = self.get_params(url_store)
-        if request_data[1] == 200:
+        self.request_data = self.get_params(url_store)
+        if self.request_data[1] == 200:
             with open("store.json", "w") as write_file:
-                json.dump(request_data, write_file, indent=4)
+                json.dump(self.request_data, write_file, indent=4)
             tmp_list = ["lastChangeDate", "warehouseName", "supplierArticle", "nmId", "barcode", 
                     "quantity", "inWayToClient", "inWayFromClient", "quantityFull", "category",
                     "subject", "brand", "techSize", "Price", "Discount", "isSupply", "isRealization", 
                     "SCCode"]
             self.glist.append(tmp_list)
-            for data in request_data[0]:
+            for data in self.request_data[0]:
                 tmp_list = list(data.values())
                 self.glist.append(tmp_list)
         # return self.get_repons(url_store)

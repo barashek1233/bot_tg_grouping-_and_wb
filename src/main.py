@@ -8,6 +8,7 @@ import grouping.up_google as up_google
 from google_upload.google_up import google_api
 from grouping.dataa import API_KEY
 from count_orders import report_sales
+from get_store import store
 
 from telebot import types
 from telebot.types import ReplyKeyboardRemove, CallbackQuery
@@ -33,7 +34,7 @@ def start(message):
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
     btn1 = types.KeyboardButton("Добавить отгрузку")
     btn_deleyed_gen = types.KeyboardButton("Отчет о хранении")
-    btn_get_stocks = types.KeyboardButton("Отчет по остаткам")
+    btn_get_stocks = types.KeyboardButton("Остатки в отчет")
     btn_get_sales = types.KeyboardButton("Отчет по продажам")
     btn_get_sales_in_sales_report = types.KeyboardButton("Продажи в отчет")
     markup.add(btn1, btn_deleyed_gen, btn_get_stocks, btn_get_sales, btn_get_sales_in_sales_report )
@@ -52,15 +53,16 @@ def get_text_messages(message):
                                                                 year=now.year,
                                                                 month=now.month),
                         )
-    elif message.text == "Отчет по остаткам":
+    elif message.text == "Остатки в отчет":
         bot.send_message(message.from_user.id, "Обработка началась")
-        request_store_ = deliveries_and_store(now.strftime('%Y-%m-%d'))
-        request_store_.get_store()
+        req_store = store()
+        req_store.grouping()
+        req_store.dict_to_list()
         g_push = google_api()
-        g_push._open_doc("store_data")
-        g_push._create_work_sheet(now.strftime("%d-%m-%Y(%H-%M)"))
-        g_push._upload_in_worksheet(request_store_.glist)
-        bot.send_message(message.from_user.id, "Обработка завершилась (смотри последний лист) https://docs.google.com/spreadsheets/d/1tYF3V-b0D1AfPg7QVObwZ3T1eaPbsMpS9WBoRak0oDk/edit?usp=sharing")
+        g_push._open_doc("Отчет по продажам")
+        g_push._open_work_sheet("Остаток на ВБ")
+        g_push._update_in_worksheet("A:D", req_store.glist)
+        bot.send_message(message.from_user.id, "Обработка завершилась (смотри отчет по продажам)")
     elif message.text == "Отчет по продажам":
         bot.send_message(message.from_user.id, 
                          "Выберете дату отчета",
